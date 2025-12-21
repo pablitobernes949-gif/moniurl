@@ -1,0 +1,44 @@
+name: Build and push to ECR
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to ECR
+        env:
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+          REGION=${{ secrets.AWS_REGION }}
+          REPO=${ECR_REPOSITORY}
+          IMAGE="${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${REPO}:${IMAGE_TAG}"
+          docker build -t ${IMAGE} .
+          aws ecr describe-repositories --repository-names "${REPO}" || aws ecr create-repository --repository-name "${REPO}"
+          docker push ${IMAGE}
+          echo "IMAGE=${IMAGE}" >> $GITHUB_OUTPUT
+
+      - name: Optional: Deploy to ECS (requires ECS_CLUSTER and ECS_SERVICE secrets)
+        if: ${{ secrets.ECS_CLUSTER && secrets.ECS_SERVICE }}
+        run: |
+          IMAGE=$(cat $GITHUB_OUTPUT | sed -n 's/^IMAGE=//p')
+          aws ecs update-service --cluster ${ { secrets.ECS_CLUSTER } } --service ${ { secrets.ECS_SERVICE } } --force-new-deployment || echo "ecs update failed"
