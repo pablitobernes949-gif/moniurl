@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200">
+  <!-- Fundo vermelho com diagonais brancas -->
+  <rect width="300" height="200" fill="#E32425"/>
+  <polygon points="0,0 150,100 0,200" fill="white"/>
+  <polygon points="300,0 150,100 300,200" fill="white"/>
+  
+  <!-- Estrela azul central com borda branca -->
+  <g transform="translate(150, 100)">
+    <polygon points="0,-45 13.3,-13.9 44.6,-13.9 19.7,5.4 32.9,36.5 0,17.1 -32.9,36.5 -19.7,5.4 -44.6,-13.9 -13.3,-13.9" 
+             fill="white" stroke="white" stroke-width="6"/>
+    <polygon points="0,-40 11.8,-12.4 39.6,-12.4 17.5,4.8 29.3,32.4 0,15.2 -29.3,32.4 -17.5,4.8 -39.6,-12.4 -11.8,-12.4" 
+             fill="#2E5C9A"/>
+  </g>
+</svg>

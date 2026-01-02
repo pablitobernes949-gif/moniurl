@@ -81,15 +81,28 @@ function persistHistory(serviceId: string, history: HealthCheck[]) {
 // Public API
 export function getAllServices(): Service[] {
   initializeStorage()
-  return Array.from(servicesCache.values())
+  const services = Array.from(servicesCache.values())
+  // Ensure all services have the new fields
+  return services.map((s) => ({
+    ...s,
+    packetLoss: s.packetLoss ?? 0,
+    minLatency: s.minLatency ?? null,
+    maxLatency: s.maxLatency ?? null,
+    avgLatency: s.avgLatency ?? null,
+  }))
 }
 
 export function getService(id: string): Service | null {
   initializeStorage()
-  const service = servicesCache.get(id)
+  let service = servicesCache.get(id)
   if (service) {
     // Load latest history from disk
     service.history = loadHistory(id)
+    // Ensure new fields exist
+    service.packetLoss = service.packetLoss ?? 0
+    service.minLatency = service.minLatency ?? null
+    service.maxLatency = service.maxLatency ?? null
+    service.avgLatency = service.avgLatency ?? null
   }
   return service || null
 }

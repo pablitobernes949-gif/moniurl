@@ -5,6 +5,7 @@ import { MoreVertical, Trash2, RefreshCw, TrendingUp, Clock, ArrowRight } from "
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { ServiceChart } from "@/components/service-chart"
+import { AlertIndicator } from "@/components/alert-indicator"
 import type { Service } from "@/lib/types"
 import { formatDistanceToNow } from "@/lib/utils"
 
@@ -46,21 +47,21 @@ export function ServiceCard({ service, onDelete, onCheckNow, onViewDetails }: Se
   }
 
   return (
-    <div className="rounded-2xl border border-border/50 bg-card p-8 shadow-sm hover:shadow-md transition-shadow">
-      <div className="mb-8 flex items-start justify-between">
-        <div className="flex-1">
-          <div className="mb-3 flex items-center gap-3">
+    <div className="rounded-xl border border-border/50 bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
+      <div className="mb-5 flex items-start justify-between">
+        <div className="flex-1 min-w-0">
+          <div className="mb-2 flex items-center gap-2">
             <div
-              className={`h-3.5 w-3.5 rounded-full ${statusColor[service.status]} shadow-lg shadow-${service.status === "online" ? "green" : service.status === "offline" ? "red" : "yellow"}-500/50`}
+              className={`h-3 w-3 rounded-full flex-shrink-0 ${statusColor[service.status]} shadow-lg shadow-${service.status === "online" ? "green" : service.status === "offline" ? "red" : "yellow"}-500/50`}
             />
-            <h3 className="text-xl font-semibold text-foreground">{service.name}</h3>
+            <h3 className="text-lg font-semibold text-foreground truncate">{service.name}</h3>
           </div>
-          <p className="text-sm text-muted-foreground">{service.url}</p>
+          <p className="text-sm text-muted-foreground truncate">{service.url}</p>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="h-10 w-10">
-              <MoreVertical className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="h-9 w-9 flex-shrink-0">
+              <MoreVertical className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -76,11 +77,11 @@ export function ServiceCard({ service, onDelete, onCheckNow, onViewDetails }: Se
         </DropdownMenu>
       </div>
 
-      <div className="mb-8 grid grid-cols-3 gap-5">
-        <div className="rounded-xl border border-border/50 bg-muted/20 p-5">
-          <p className="mb-2 text-xs font-medium text-muted-foreground uppercase tracking-wider">Status</p>
+      <div className="mb-5 grid grid-cols-3 gap-3">
+        <div className="rounded-lg border border-border/50 bg-muted/20 p-3">
+          <p className="mb-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider">Status</p>
           <div
-            className={`inline-flex items-center rounded-lg border px-3 py-1.5 text-xs font-semibold ${
+            className={`inline-flex items-center rounded-md border px-2.5 py-1 text-xs font-semibold ${
               statusBg[service.status]
             }`}
           >
@@ -88,19 +89,19 @@ export function ServiceCard({ service, onDelete, onCheckNow, onViewDetails }: Se
           </div>
         </div>
 
-        <div className="rounded-xl border border-border/50 bg-muted/20 p-5">
-          <p className="mb-2 text-xs font-medium text-muted-foreground uppercase tracking-wider">Uptime</p>
-          <p className="text-2xl font-bold text-foreground">{service.uptime.toFixed(1)}%</p>
+        <div className="rounded-lg border border-border/50 bg-muted/20 p-3">
+          <p className="mb-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider">Uptime</p>
+          <p className="text-xl font-bold text-foreground">{service.uptime.toFixed(1)}%</p>
         </div>
 
-        <div className="rounded-xl border border-border/50 bg-muted/20 p-5">
-          <p className="mb-2 text-xs font-medium text-muted-foreground uppercase tracking-wider">Latência</p>
-          <p className="text-2xl font-bold text-foreground">{service.responseTime || 0}ms</p>
+        <div className="rounded-lg border border-border/50 bg-muted/20 p-3">
+          <p className="mb-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider">Latência</p>
+          <p className="text-xl font-bold text-foreground">{service.responseTime || 0}ms</p>
         </div>
       </div>
 
-      <div className="mb-6">
-        <div className="mb-4 flex items-center justify-between">
+      <div className="mb-4">
+        <div className="mb-3 flex items-center justify-between">
           <p className="text-sm font-semibold text-foreground">Histórico (24h)</p>
           <p className="text-xs text-muted-foreground">Última: {formatDistanceToNow(service.lastCheck)}</p>
         </div>
@@ -108,20 +109,23 @@ export function ServiceCard({ service, onDelete, onCheckNow, onViewDetails }: Se
       </div>
 
       <div className="flex items-center justify-between pt-4 border-t border-border/50">
-        <div className="flex items-center gap-6 text-xs text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <TrendingUp className="h-4 w-4" />
+        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+          <div className="flex items-center gap-1.5">
+            <TrendingUp className="h-3.5 w-3.5" />
             <span>{service.history.length} verificações</span>
           </div>
-          <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4" />
+          <div className="flex items-center gap-1.5">
+            <Clock className="h-3.5 w-3.5" />
             <span>Há {Math.floor((Date.now() - service.createdAt) / (1000 * 60 * 60))}h</span>
           </div>
         </div>
-        <Button variant="outline" size="sm" onClick={() => onViewDetails(service)} className="h-9">
-          Ver Detalhes
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
+        <div className="flex items-center gap-2">
+          <AlertIndicator serviceId={service.id} />
+          <Button variant="outline" size="sm" onClick={() => onViewDetails(service)} className="h-8 text-sm">
+            Ver Detalhes
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
       </div>
     </div>
   )

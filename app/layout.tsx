@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { BackendInitializer } from "@/components/backend-initializer"
+import { AlertNotificationSystem } from "@/components/alert-notification-system"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -38,6 +39,7 @@ export default function RootLayout({
       <body className={`font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <BackendInitializer />
+          <AlertNotificationSystem />
           {children}
           <Analytics />
         </ThemeProvider>

@@ -1,0 +1,47 @@
+[
+  {
+    "timestamp": 1767366064208,
+    "status": "online",
+    "responseTime": 44,
+    "packetLoss": 0,
+    "minLatency": 38,
+    "maxLatency": 54,
+    "avgLatency": 44
+  },
+  {
+    "timestamp": 1767366094166,
+    "status": "online",
+    "responseTime": 64,
+    "packetLoss": 0,
+    "minLatency": 55,
+    "maxLatency": 79,
+    "avgLatency": 64
+  },
+  {
+    "timestamp": 1767366124142,
+    "status": "online",
+    "responseTime": 71,
+    "packetLoss": 0,
+    "minLatency": 61,
+    "maxLatency": 83,
+    "avgLatency": 71
+  },
+  {
+    "timestamp": 1767366154227,
+    "status": "online",
+    "responseTime": 50,
+    "packetLoss": 0,
+    "minLatency": 43,
+    "maxLatency": 58,
+    "avgLatency": 50
+  },
+  {
+    "timestamp": 1767366184175,
+    "status": "online",
+    "responseTime": 67,
+    "packetLoss": 0,
+    "minLatency": 56,
+    "maxLatency": 78,
+    "avgLatency": 67
+  }
+]

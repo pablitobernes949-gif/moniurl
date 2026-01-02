@@ -1,12 +1,14 @@
 import { NextResponse } from "next/server"
 import { initializeBackend } from "@/lib/init"
 
-// Initialize on first request
+// Initialize backend on any request
 let hasInitialized = false
 
 export async function GET() {
   try {
+    // Initialize backend if not already done
     if (!hasInitialized) {
+      console.log("[Health] Initializing backend on first health check...")
       initializeBackend()
       hasInitialized = true
     }
@@ -15,6 +17,7 @@ export async function GET() {
       status: "ok",
       message: "Backend is running",
       timestamp: new Date().toISOString(),
+      initialized: hasInitialized,
     })
   } catch (error) {
     console.error("Error in health check:", error)

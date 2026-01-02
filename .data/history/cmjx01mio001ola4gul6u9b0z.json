@@ -1,0 +1,74 @@
+[
+  {
+    "timestamp": 1767365973916,
+    "status": "online",
+    "responseTime": 134,
+    "packetLoss": 0,
+    "minLatency": 126,
+    "maxLatency": 140,
+    "avgLatency": 134
+  },
+  {
+    "timestamp": 1767366003937,
+    "status": "online",
+    "responseTime": 150,
+    "packetLoss": 0,
+    "minLatency": 64,
+    "maxLatency": 173,
+    "avgLatency": 150
+  },
+  {
+    "timestamp": 1767366033828,
+    "status": "online",
+    "responseTime": 97,
+    "packetLoss": 0,
+    "minLatency": 84,
+    "maxLatency": 101,
+    "avgLatency": 97
+  },
+  {
+    "timestamp": 1767366063993,
+    "status": "online",
+    "responseTime": 196,
+    "packetLoss": 0,
+    "minLatency": 171,
+    "maxLatency": 234,
+    "avgLatency": 196
+  },
+  {
+    "timestamp": 1767366093920,
+    "status": "online",
+    "responseTime": 174,
+    "packetLoss": 0,
+    "minLatency": 81,
+    "maxLatency": 200,
+    "avgLatency": 174
+  },
+  {
+    "timestamp": 1767366123914,
+    "status": "online",
+    "responseTime": 132,
+    "packetLoss": 0,
+    "minLatency": 121,
+    "maxLatency": 145,
+    "avgLatency": 132
+  },
+  {
+    "timestamp": 1767366154016,
+    "status": "online",
+    "responseTime": 142,
+    "packetLoss": 0,
+    "minLatency": 80,
+    "maxLatency": 176,
+    "avgLatency": 142
+  },
+  {
+    "timestamp": 1767366183897,
+    "status": "online",
+    "responseTime": 131,
+    "packetLoss": 0,
+    "minLatency": 101,
+    "maxLatency": 151,
+    "avgLatency": 131
+  }
+]

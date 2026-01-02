@@ -3,13 +3,24 @@ import { startMonitoring } from "./worker"
 let initialized = false
 
 export function initializeBackend() {
-  if (initialized) return
+  if (initialized) {
+    console.log("[Init] Backend already initialized")
+    return
+  }
 
-  console.log("🚀 Initializing backend services...")
+  console.log("[Init] 🚀 Initializing backend services...")
 
-  // Start monitoring worker (check every 30 seconds)
-  startMonitoring(30000)
+  try {
+    // Start monitoring worker (check every 30 seconds)
+    startMonitoring(30000)
+    initialized = true
+    console.log("[Init] ✓ Backend services initialized successfully")
+  } catch (error) {
+    console.error("[Init] ✗ Failed to initialize backend:", error)
+  }
+}
 
-  initialized = true
-  console.log("✓ Backend services initialized")
+// Force initialization on module load (for development/server startup)
+if (typeof global !== 'undefined') {
+  console.log("[Init] Backend module loaded")
 }

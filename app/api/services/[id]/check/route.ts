@@ -2,9 +2,10 @@ import { NextResponse } from "next/server"
 import { getService, appendHealthCheck } from "@/lib/storage"
 import { monitorService, calculateUptime } from "@/lib/monitoring"
 
-export async function POST(_req: Request, { params }: { params: { id: string } }) {
+export async function POST(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const service = getService(params.id)
+    const { id } = await params
+    const service = getService(id)
     if (!service) {
       return NextResponse.json({ error: "Service not found" }, { status: 404 })
     }

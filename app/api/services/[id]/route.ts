@@ -2,9 +2,10 @@ import { NextResponse } from "next/server"
 import { getService, updateService, deleteService } from "@/lib/storage"
 import type { Service } from "@/lib/types"
 
-export async function GET(_req: Request, { params }: { params: { id: string } }) {
+export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const service = getService(params.id)
+    const { id } = await params
+    const service = getService(id)
     if (!service) {
       return NextResponse.json({ error: "Service not found" }, { status: 404 })
     }
@@ -15,10 +16,11 @@ export async function GET(_req: Request, { params }: { params: { id: string } })
   }
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params
     const body = await req.json()
-    const service = updateService(params.id, body)
+    const service = updateService(id, body)
     
     if (!service) {
       return NextResponse.json({ error: "Service not found" }, { status: 404 })
@@ -31,9 +33,10 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(_req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const deleted = deleteService(params.id)
+    const { id } = await params
+    const deleted = deleteService(id)
     if (!deleted) {
       return NextResponse.json({ error: "Service not found" }, { status: 404 })
     }

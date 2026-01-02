@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server"
-import { getHistory, subscribe } from "@/lib/realtime"
-import { getHistoryAws } from "@/lib/aws-realtime"
-import { getService } from "@/lib/storage"
+import { subscribe } from "@/lib/alerts"
 
-function createSSEStream(id: string, initial: any) {
+function createAlertSSEStream() {
   const encoder = new TextEncoder()
   const stream = new ReadableStream({
     start(controller) {
@@ -16,15 +14,13 @@ function createSSEStream(id: string, initial: any) {
         }
       }
 
-      // send initial state
-      send(initial)
-
-      const cb = (d: any) => send(d)
-      const unsub = subscribe(id, cb)
+      const unsubscribe = subscribe((alert) => {
+        send(alert)
+      })
 
       if (controller.signal) {
         controller.signal.addEventListener("abort", () => {
-          unsub()
+          unsubscribe()
         })
       }
     },
@@ -34,13 +30,9 @@ function createSSEStream(id: string, initial: any) {
   return stream
 }
 
-export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function GET() {
   try {
-    const { id } = await params
-    // If AWS configured, fetch initial state from DynamoDB; otherwise from storage
-    const service = await getService(id)
-    const initialHistory = process.env.AWS_DYNAMODB_TABLE ? await getHistoryAws(id) : service?.history || []
-    const stream = createSSEStream(id, { history: initialHistory })
+    const stream = createAlertSSEStream()
     return new Response(stream, {
       headers: {
         "Content-Type": "text/event-stream",
@@ -49,7 +41,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
       },
     })
   } catch (error) {
-    console.error("Error setting up SSE:", error)
+    console.error("Error setting up alert SSE:", error)
     return new Response("Error setting up event stream", { status: 500 })
   }
 }

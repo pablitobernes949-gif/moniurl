@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Service {
+  id            String   @id @default(cuid())
+  name          String
+  type          String   // "ip" or "url"
+  url           String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  checks        ServiceCheck[]
+  alerts        Alert[]
+  alertRules    AlertRule[]
+
+  @@unique([url])
+}
+
+model ServiceCheck {
+  id        String   @id @default(cuid())
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  status    String   // "online" or "offline"
+  latency   Int?     // in milliseconds
+  loss      Int      // packet loss percentage
+  uptime    Float    // percentage
+  createdAt DateTime @default(now())
+
+  @@index([serviceId])
+  @@index([createdAt])
+}
+
+model AlertRule {
+  id        String   @id @default(cuid())
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  type      String   // "latency", "packet_loss", "availability"
+  threshold Float
+  severity  String   // "info", "warning", "critical"
+  enabled   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([serviceId, type])
+  @@index([serviceId])
+}
+
+model Alert {
+  id        String   @id @default(cuid())
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  type      String   // "latency", "packet_loss", "availability"
+  severity  String   // "info", "warning", "critical"
+  message   String
+  status    String   @default("active") // "active", "acknowledged", "resolved"
+
+  triggeredAt    DateTime @default(now())
+  acknowledgedAt DateTime?
+  resolvedAt     DateTime?
+
+  @@index([serviceId])
+  @@index([status])
+  @@index([triggeredAt])
+}
