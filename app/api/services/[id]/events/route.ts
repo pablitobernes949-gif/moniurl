@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { getHistory, subscribe } from "@/lib/realtime"
+import { getServiceHistory, subscribe } from "@/lib/realtime"
 import { getHistoryAws } from "@/lib/aws-realtime"
 
 function createSSEStream(id: string, initial: any) {
@@ -32,15 +32,20 @@ function createSSEStream(id: string, initial: any) {
 }
 
 export async function GET(_req: Request, { params }: { params: { id: string } }) {
-  const id = params.id
-  // If AWS configured, fetch initial state from DynamoDB; otherwise from in-memory
-  const initialHistory = process.env.AWS_DYNAMODB_TABLE ? await getHistoryAws(id) : getHistory(id)
-  const stream = createSSEStream(id, { history: initialHistory })
-  return new Response(stream, {
-    headers: {
-      "Content-Type": "text/event-stream",
-      "Cache-Control": "no-cache",
-      Connection: "keep-alive",
-    },
-  })
+  try {
+    const id = params.id
+    // If AWS configured, fetch initial state from DynamoDB; otherwise from storage
+    const initialHistory = process.env.AWS_DYNAMODB_TABLE ? await getHistoryAws(id) : getServiceHistory(id)
+    const stream = createSSEStream(id, { history: initialHistory })
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+      },
+    })
+  } catch (error) {
+    console.error("Error setting up SSE:", error)
+    return new Response("Error setting up event stream", { status: 500 })
+  }
 }

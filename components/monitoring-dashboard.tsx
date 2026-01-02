@@ -7,7 +7,6 @@ import { ServiceCard } from "@/components/service-card"
 import { AddServiceDialog } from "@/components/add-service-dialog"
 import { ServiceDetailsModal } from "@/components/service-details-modal"
 import type { Service } from "@/lib/types"
-import { monitorService, calculateUptime } from "@/lib/monitoring"
 
 export function MonitoringDashboard() {
   const [services, setServices] = useState<Service[]>([])
@@ -16,107 +15,92 @@ export function MonitoringDashboard() {
   const [selectedService, setSelectedService] = useState<Service | null>(null)
   const [isDetailsOpen, setIsDetailsOpen] = useState(false)
 
+  // Load services from API on mount
   useEffect(() => {
-    const stored = localStorage.getItem("monitored-services")
-    if (stored) {
-      setServices(JSON.parse(stored))
+    const loadServices = async () => {
+      try {
+        const res = await fetch("/api/services")
+        if (res.ok) {
+          const data = await res.json()
+          setServices(data.services || [])
+        }
+      } catch (error) {
+        console.error("Failed to load services:", error)
+      } finally {
+        setIsLoading(false)
+      }
     }
-    setIsLoading(false)
+
+    loadServices()
   }, [])
 
-  useEffect(() => {
-    if (!isLoading && services.length > 0) {
-      localStorage.setItem("monitored-services", JSON.stringify(services))
-    }
-  }, [services, isLoading])
-
+  // Refresh services every 30 seconds
   useEffect(() => {
     const interval = setInterval(async () => {
-      if (services.length === 0) return
-
-      const updatedServices = await Promise.all(
-        services.map(async (service) => {
-          const result = await monitorService(service.url)
-          const newCheck = {
-            timestamp: Date.now(),
-            status: result.status,
-            responseTime: result.responseTime,
-          }
-
-          const updatedHistory = [...service.history, newCheck].slice(-50)
-
-          return {
-            ...service,
-            status: result.status,
-            lastCheck: Date.now(),
-            responseTime: result.responseTime,
-            history: updatedHistory,
-            uptime: calculateUptime(updatedHistory),
-          }
-        }),
-      )
-
-      setServices(updatedServices)
-    }, 30000) // Check every 30 seconds
+      try {
+        const res = await fetch("/api/services")
+        if (res.ok) {
+          const data = await res.json()
+          setServices(data.services || [])
+        }
+      } catch (error) {
+        console.error("Failed to refresh services:", error)
+      }
+    }, 30000)
 
     return () => clearInterval(interval)
-  }, [services])
+  }, [])
 
   const handleAddService = async (url: string, name: string) => {
-    const result = await monitorService(url)
-    const newService: Service = {
-      id: Date.now().toString(),
-      name,
-      url,
-      status: result.status,
-      lastCheck: Date.now(),
-      responseTime: result.responseTime,
-      history: [
-        {
-          timestamp: Date.now(),
-          status: result.status,
-          responseTime: result.responseTime,
-        },
-      ],
-      uptime: 100,
-      createdAt: Date.now(),
-    }
+    try {
+      const res = await fetch("/api/services", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, url }),
+      })
 
-    setServices([...services, newService])
-    setIsAddDialogOpen(false)
+      if (res.ok) {
+        const data = await res.json()
+        setServices([...services, data.service])
+        setIsAddDialogOpen(false)
+      } else {
+        const error = await res.json()
+        alert(`Erro ao adicionar serviço: ${error.error}`)
+      }
+    } catch (error) {
+      console.error("Error adding service:", error)
+      alert("Erro ao conectar com o servidor")
+    }
   }
 
-  const handleDeleteService = (id: string) => {
-    setServices(services.filter((s) => s.id !== id))
+  const handleDeleteService = async (id: string) => {
+    try {
+      const res = await fetch(`/api/services/${id}`, { method: "DELETE" })
+      if (res.ok) {
+        setServices(services.filter((s) => s.id !== id))
+      } else {
+        alert("Erro ao deletar serviço")
+      }
+    } catch (error) {
+      console.error("Error deleting service:", error)
+      alert("Erro ao conectar com o servidor")
+    }
   }
 
   const handleCheckNow = async (id: string) => {
-    const service = services.find((s) => s.id === id)
-    if (!service) return
-
-    const result = await monitorService(service.url)
-    const newCheck = {
-      timestamp: Date.now(),
-      status: result.status,
-      responseTime: result.responseTime,
+    try {
+      const res = await fetch(`/api/services/${id}/check`, { method: "POST" })
+      if (res.ok) {
+        const data = await res.json()
+        setServices(services.map((s) => (s.id === id ? data.service : s)))
+        // Update selected service if it's the one being checked
+        if (selectedService?.id === id) {
+          setSelectedService(data.service)
+        }
+      }
+    } catch (error) {
+      console.error("Error checking service:", error)
     }
-
-    const updatedHistory = [...service.history, newCheck].slice(-50)
-
-    setServices(
-      services.map((s) =>
-        s.id === id
-          ? {
-              ...s,
-              status: result.status,
-              lastCheck: Date.now(),
-              responseTime: result.responseTime,
-              history: updatedHistory,
-              uptime: calculateUptime(updatedHistory),
-            }
-          : s,
-      ),
-    )
   }
 
   const handleViewDetails = (service: Service) => {
@@ -126,7 +110,6 @@ export function MonitoringDashboard() {
 
   const activeServices = services.filter((s) => s.status === "online").length
   const downServices = services.filter((s) => s.status === "offline").length
-  const unstableServices = services.filter((s) => s.status === "unstable").length
   const avgResponseTime =
     services.length > 0 ? Math.round(services.reduce((acc, s) => acc + (s.responseTime || 0), 0) / services.length) : 0
 
@@ -203,7 +186,14 @@ export function MonitoringDashboard() {
           </div>
         </div>
 
-        {services.length === 0 ? (
+        {isLoading ? (
+          <div className="flex min-h-[500px] items-center justify-center">
+            <div className="text-center">
+              <div className="mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+              <p className="text-muted-foreground">Carregando serviços...</p>
+            </div>
+          </div>
+        ) : services.length === 0 ? (
           <div className="flex min-h-[500px] flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border/50 bg-card p-16 text-center">
             <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-muted/50">
               <Activity className="h-10 w-10 text-muted-foreground" />
