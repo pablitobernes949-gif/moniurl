@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   title: "Service Monitor - Monitoramento em Tempo Real",
   description: "Sistema profissional de monitoramento de serviços para verificar status, uptime e performance",
   generator: "v0.app",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
   icons: {
     icon: [
       {

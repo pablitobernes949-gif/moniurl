@@ -141,60 +141,60 @@ export function MonitoringDashboard() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm">
-        <div className="container mx-auto px-8 py-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl overflow-hidden">
+      <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="flex h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 items-center justify-center rounded-2xl overflow-hidden flex-shrink-0">
                 <img src="/logo-para.svg" alt="Logo Pará" className="h-full w-full object-cover" />
               </div>
-              <div>
-                <h1 className="text-3xl font-bold text-foreground">Service Monitor</h1>
-                <p className="text-base text-muted-foreground mt-1">Monitoramento em tempo real de serviços</p>
+              <div className="min-w-0">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground truncate">Service Monitor</h1>
+                <p className="text-xs sm:text-sm lg:text-base text-muted-foreground mt-0.5 sm:mt-1 truncate">Monitoramento em tempo real</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Button onClick={() => setIsComparisonOpen(true)} variant="outline" size="lg">
-                <GitCompare className="mr-2 h-5 w-5" />
-                Comparar
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
+              <Button onClick={() => setIsComparisonOpen(true)} variant="outline" size="sm" className="lg:h-12 lg:px-4 whitespace-nowrap flex-shrink-0">
+                <GitCompare className="h-4 w-4 lg:mr-2" />
+                <span className="hidden sm:inline">Comparar</span>
               </Button>
-              <Button onClick={() => setIsWebhookSettingsOpen(true)} variant="outline" size="lg">
-                <Webhook className="mr-2 h-5 w-5" />
-                Webhooks
+              <Button onClick={() => setIsWebhookSettingsOpen(true)} variant="outline" size="sm" className="lg:h-12 lg:px-4 whitespace-nowrap flex-shrink-0">
+                <Webhook className="h-4 w-4 lg:mr-2" />
+                <span className="hidden sm:inline">Webhooks</span>
               </Button>
-              <Button onClick={() => setIsReportsSettingsOpen(true)} variant="outline" size="lg">
-                <FileText className="mr-2 h-5 w-5" />
-                Relatórios
+              <Button onClick={() => setIsReportsSettingsOpen(true)} variant="outline" size="sm" className="lg:h-12 lg:px-4 whitespace-nowrap flex-shrink-0">
+                <FileText className="h-4 w-4 lg:mr-2" />
+                <span className="hidden sm:inline">Relatórios</span>
               </Button>
-              <Button onClick={() => setIsAddDialogOpen(true)} size="lg" className="h-12 px-6">
-                <Plus className="mr-2 h-5 w-5" />
-                Adicionar Serviço
+              <Button onClick={() => setIsAddDialogOpen(true)} size="sm" className="lg:h-12 lg:px-6 whitespace-nowrap flex-shrink-0">
+                <Plus className="h-4 w-4 lg:mr-2" />
+                <span className="hidden sm:inline">Adicionar</span>
               </Button>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="container mx-auto px-8 py-10">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10">
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="mb-10">
-            <TabsTrigger value="overview" className="flex items-center gap-2">
+          <TabsList className="mb-6 sm:mb-8 lg:mb-10 w-full sm:w-auto grid grid-cols-2 sm:flex">
+            <TabsTrigger value="overview" className="flex items-center justify-center gap-2">
               <Activity className="h-4 w-4" />
-              Visão Geral
+              <span className="text-xs sm:text-sm">Visão Geral</span>
             </TabsTrigger>
-            <TabsTrigger value="trends" className="flex items-center gap-2">
+            <TabsTrigger value="trends" className="flex items-center justify-center gap-2">
               <TrendingUp className="h-4 w-4" />
-              Tendências
+              <span className="text-xs sm:text-sm">Tendências</span>
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview">
-            <div className="mb-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          <div className="rounded-2xl border border-border/50 bg-card p-8 shadow-sm hover:shadow-md transition-shadow">
+            <div className="mb-6 sm:mb-8 lg:mb-10 grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-2xl border border-border/50 bg-card p-5 sm:p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Total de Serviços</p>
-                <p className="mt-3 text-4xl font-bold text-foreground">{services.length}</p>
+                <p className="mt-3 text-3xl sm:text-4xl font-bold text-foreground">{services.length}</p>
                 <p className="mt-2 text-xs text-muted-foreground">
                   {unstableServices > 0 && `${unstableServices} instável${unstableServices > 1 ? 'is' : ''}`}
                 </p>
@@ -275,7 +275,7 @@ export function MonitoringDashboard() {
         ) : (
           <>
             {/* Search and Filter Bar */}
-            <div className="mb-8 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between bg-card rounded-lg border border-border/50 p-4">
+            <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-between bg-card rounded-lg border border-border/50 p-3 sm:p-4">
               <div className="flex-1 w-full sm:max-w-md">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -283,15 +283,15 @@ export function MonitoringDashboard() {
                     placeholder="Buscar por nome ou URL..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 bg-background border-border"
+                    className="pl-10 bg-background border-border h-10"
                   />
                 </div>
               </div>
               
-              <div className="flex items-center gap-3">
-                <Filter className="h-4 w-4 text-muted-foreground" />
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Filter className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                 <Select value={statusFilter} onValueChange={(value: any) => setStatusFilter(value)}>
-                  <SelectTrigger className="w-[180px] bg-background border-border">
+                  <SelectTrigger className="w-full sm:w-[180px] bg-background border-border h-10">
                     <SelectValue placeholder="Filtrar por status" />
                   </SelectTrigger>
                   <SelectContent>
@@ -313,7 +313,7 @@ export function MonitoringDashboard() {
                 </p>
               </div>
             ) : (
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
                 {filteredServices.map((service) => (
                   <ServiceCard
                     key={service.id}
