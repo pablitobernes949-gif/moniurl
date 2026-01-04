@@ -10,7 +10,7 @@ import { getAllServices } from "@/lib/database/storage"
  */
 export async function POST(request: Request) {
   try {
-    const body = await request.json()
+    const body = await request.json().catch(() => ({}))
     const { range, annotation } = body
 
     // Parse range
@@ -19,33 +19,38 @@ export async function POST(request: Request) {
 
     const annotations: any[] = []
 
-    // Buscar alertas no período
-    const alerts = await prisma.alert.findMany({
-      where: {
-        createdAt: {
-          gte: from,
-          lte: to,
+    // Buscar alertas no período (com try/catch separado)
+    try {
+      const alerts = await prisma.alert.findMany({
+        where: {
+          createdAt: {
+            gte: from,
+            lte: to,
+          },
         },
-      },
-      include: {
-        service: true,
-      },
-      orderBy: { createdAt: "desc" },
-    })
-
-    // Converter alertas em anotações
-    alerts.forEach((alert) => {
-      let tags = [alert.severity, alert.type]
-      if (alert.status) tags.push(alert.status)
-
-      annotations.push({
-        annotation: annotation?.name || "Alerts",
-        time: alert.createdAt.getTime(),
-        title: `${alert.type}: ${alert.service.name}`,
-        text: alert.message,
-        tags,
+        include: {
+          service: true,
+        },
+        orderBy: { createdAt: "desc" },
       })
-    })
+
+      // Converter alertas em anotações
+      alerts.forEach((alert) => {
+        let tags = [alert.severity, alert.type]
+        if (alert.status) tags.push(alert.status)
+
+        annotations.push({
+          annotation: annotation?.name || "Alerts",
+          time: alert.createdAt.getTime(),
+          title: `${alert.type}: ${alert.service.name}`,
+          text: alert.message,
+          tags,
+        })
+      })
+    } catch (alertError) {
+      console.log("Aviso: Não foi possível buscar alertas (tabela pode não existir):", alertError)
+      // Continuar sem alertas se a tabela não existir
+    }
 
     // Buscar mudanças de status significativas
     const services = await prisma.service.findMany({
@@ -90,7 +95,8 @@ export async function POST(request: Request) {
     return NextResponse.json(annotations)
   } catch (error) {
     console.error("Erro ao buscar anotações:", error)
-    return NextResponse.json({ error: "Erro ao buscar anotações" }, { status: 500 })
+    // Retornar array vazio em vez de erro para não quebrar o Grafana
+    return NextResponse.json([])
   }
 }
 
