@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { FileText, Mail, Download, Calendar } from "lucide-react"
-import type { Service } from "@/lib/types"
+import type { Service } from "@/lib/utils/types"
 
 interface ReportConfig {
   frequency: "daily" | "weekly" | "monthly"

@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { AlertCircle, CheckCircle, AlertTriangle } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
-import type { Alert } from "@/lib/types"
+import type { Alert } from "@/lib/utils/types"
 
 export function AlertNotificationSystem() {
   const { toast } = useToast()

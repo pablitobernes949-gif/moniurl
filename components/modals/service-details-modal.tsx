@@ -5,10 +5,10 @@ import { useEffect, useState, useRef, useCallback } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import type { Service } from "@/lib/types"
-import { formatDistanceToNow } from "@/lib/utils"
-import { ServiceDetailsChart } from "@/components/service-details-chart"
-import { IncidentHistory } from "@/components/incident-history"
+import type { Service } from "@/lib/utils/types"
+import { formatDistanceToNow } from "@/lib/utils/utils"
+import { ServiceDetailsChart } from "@/components/charts/service-details-chart"
+import { IncidentHistory } from "@/components/panels/incident-history"
 
 interface ServiceDetailsModalProps {
   service: Service | null

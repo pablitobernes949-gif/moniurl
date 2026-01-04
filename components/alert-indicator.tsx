@@ -5,8 +5,8 @@ import { AlertCircle, AlertTriangle, Settings, History } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { AlertSettingsDialog } from "@/components/alert-settings-dialog"
-import { AlertHistoryDialog } from "@/components/alert-history-dialog"
-import type { Alert } from "@/lib/types"
+import { AlertHistoryDialog } from "@/components/modals/alert-history-dialog"
+import type { Alert } from "@/lib/utils/types"
 
 interface AlertIndicatorProps {
   serviceId: string

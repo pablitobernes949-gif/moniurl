@@ -1,7 +1,7 @@
 "use client"
 
 import { TrendingUp, Target, Award } from "lucide-react"
-import type { HealthCheck } from "@/lib/types"
+import type { HealthCheck } from "@/lib/utils/types"
 
 interface SLAMetricsProps {
   history: HealthCheck[]

@@ -4,10 +4,10 @@ import { useState } from "react"
 import { MoreVertical, Trash2, RefreshCw, TrendingUp, Clock, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { ServiceChart } from "@/components/service-chart"
+import { ServiceChart } from "@/components/charts/service-chart"
 import { AlertIndicator } from "@/components/alert-indicator"
-import type { Service } from "@/lib/types"
-import { formatDistanceToNow } from "@/lib/utils"
+import type { Service } from "@/lib/utils/types"
+import { formatDistanceToNow } from "@/lib/utils/utils"
 
 interface ServiceCardProps {
   service: Service

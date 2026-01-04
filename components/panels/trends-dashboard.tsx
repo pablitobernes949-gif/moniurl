@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { LineChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis, Area, AreaChart } from "recharts"
 import { TrendingUp, TrendingDown, Activity, AlertTriangle } from "lucide-react"
-import type { Service } from "@/lib/types"
+import type { Service } from "@/lib/utils/types"
 
 interface TrendsDashboardProps {
   services: Service[]

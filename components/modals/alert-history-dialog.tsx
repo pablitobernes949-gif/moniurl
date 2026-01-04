@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { AlertCircle, CheckCircle, AlertTriangle, X } from "lucide-react"
-import type { Alert } from "@/lib/types"
+import type { Alert } from "@/lib/utils/types"
 
 interface AlertHistoryDialogProps {
   serviceId: string

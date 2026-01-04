@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis, Brush } from "recharts"
 import { Button } from "@/components/ui/button"
 import { ZoomIn, ZoomOut, Maximize2 } from "lucide-react"
-import type { HealthCheck } from "@/lib/types"
+import type { HealthCheck } from "@/lib/utils/types"
 
 interface ServiceChartProps {
   history: HealthCheck[]

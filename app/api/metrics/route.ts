@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { prisma } from "@/lib/db"
-import { getAllServices } from "@/lib/storage"
+import { prisma } from "@/lib/database/db"
+import { getAllServices } from "@/lib/database/storage"
 
 // Endpoint de métricas para Grafana (formato JSON)
 export async function GET(request: Request) {

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { getAlertHistory, getActiveAlerts, acknowledgeAlert, resolveAlert } from "@/lib/alerts"
+import { getAlertHistory, getActiveAlerts, acknowledgeAlert, resolveAlert } from "@/lib/monitoring/alerts"
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {

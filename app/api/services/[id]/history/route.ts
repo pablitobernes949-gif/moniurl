@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server"
-import { getServiceHistory, setServiceHistory, appendHealthCheck, getService } from "@/lib/storage"
-import { getHistoryAws, appendCheckAws, setHistoryAws } from "@/lib/aws-realtime"
-import { getRecentChecks, saveServiceCheck, getChecksByPeriod, getChecksByDateRange } from "@/lib/db-operations"
-import type { HealthCheck } from "@/lib/types"
+import { getServiceHistory, setServiceHistory, appendHealthCheck, getService } from "@/lib/database/storage"
+import { getHistoryAws, appendCheckAws, setHistoryAws } from "@/lib/monitoring/aws-realtime"
+import { getRecentChecks, saveServiceCheck, getChecksByPeriod, getChecksByDateRange } from "@/lib/database/db-operations"
+import type { HealthCheck } from "@/lib/utils/types"
 
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
-import { getHistory, subscribe } from "@/lib/realtime"
-import { getHistoryAws } from "@/lib/aws-realtime"
-import { getService } from "@/lib/storage"
+import { getHistory, subscribe } from "@/lib/monitoring/realtime"
+import { getHistoryAws } from "@/lib/monitoring/aws-realtime"
+import { getService } from "@/lib/database/storage"
 
 function createSSEStream(id: string, initial: any) {
   const encoder = new TextEncoder()

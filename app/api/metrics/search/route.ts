@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { prisma } from "@/lib/db"
+import { prisma } from "@/lib/database/db"
 
 // Endpoint de search para Grafana SimpleJSON datasource
 export async function POST(request: Request) {

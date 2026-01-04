@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { getService, updateService, deleteService } from "@/lib/storage"
-import type { Service } from "@/lib/types"
+import { getService, updateService, deleteService } from "@/lib/database/storage"
+import type { Service } from "@/lib/utils/types"
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {

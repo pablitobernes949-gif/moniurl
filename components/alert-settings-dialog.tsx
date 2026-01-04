@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { AlertTriangle, Trash2 } from "lucide-react"
-import type { AlertRule, AlertType, AlertSeverity } from "@/lib/types"
+import type { AlertRule, AlertType, AlertSeverity } from "@/lib/utils/types"
 
 interface AlertSettingsDialogProps {
   serviceId: string

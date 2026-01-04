@@ -5,8 +5,8 @@ import {
   updateAlertRule, 
   deleteAlertRule,
   initializeDefaultRules
-} from "@/lib/alerts"
-import type { AlertType, AlertSeverity } from "@/lib/types"
+} from "@/lib/monitoring/alerts"
+import type { AlertType, AlertSeverity } from "@/lib/utils/types"
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {

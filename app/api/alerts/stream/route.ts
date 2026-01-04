@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { subscribe } from "@/lib/alerts"
+import { subscribe } from "@/lib/monitoring/alerts"
 
 function createAlertSSEStream() {
   const encoder = new TextEncoder()

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Area, AreaChart, BarChart, Bar, Line, LineChart, ComposedChart, Scatter, ScatterChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 import { Button } from "@/components/ui/button"
-import type { HealthCheck } from "@/lib/types"
+import type { HealthCheck } from "@/lib/utils/types"
 
 interface ServiceDetailsChartProps {
   history: HealthCheck[]

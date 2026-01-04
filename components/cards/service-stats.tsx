@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { Activity, TrendingUp, TrendingDown, Minus } from "lucide-react"
-import type { Service } from "@/lib/types"
+import type { Service } from "@/lib/utils/types"
 
 interface ServiceStatsProps {
   services: Service[]

@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server"
-import { getAllServices, createService } from "@/lib/storage"
-import { monitorService } from "@/lib/monitoring"
-import { initializeDefaultRules } from "@/lib/alerts"
-import { prisma } from "@/lib/db"
-import { saveServiceCheck } from "@/lib/db-operations"
-import type { Service } from "@/lib/types"
+import { getAllServices, createService } from "@/lib/database/storage"
+import { monitorService } from "@/lib/monitoring/monitoring"
+import { initializeDefaultRules } from "@/lib/monitoring/alerts"
+import { prisma } from "@/lib/database/db"
+import { saveServiceCheck } from "@/lib/database/db-operations"
+import type { Service } from "@/lib/utils/types"
 
 export async function GET() {
   try {

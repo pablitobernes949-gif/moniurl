@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { getService, appendHealthCheck } from "@/lib/storage"
-import { monitorService, calculateUptime } from "@/lib/monitoring"
+import { getService, appendHealthCheck } from "@/lib/database/storage"
+import { monitorService, calculateUptime } from "@/lib/monitoring/monitoring"
 
 export async function POST(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {

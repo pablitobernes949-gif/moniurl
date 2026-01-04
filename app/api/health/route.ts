@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { initializeBackend } from "@/lib/init"
+import { initializeBackend } from "@/lib/initialization/init"
 
 // Initialize backend on any request
 let hasInitialized = false

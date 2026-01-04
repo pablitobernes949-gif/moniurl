@@ -1,7 +1,7 @@
 "use client"
 
 import { AlertTriangle, CheckCircle, Clock } from "lucide-react"
-import type { HealthCheck } from "@/lib/types"
+import type { HealthCheck } from "@/lib/utils/types"
 
 interface IncidentHistoryProps {
   history: HealthCheck[]

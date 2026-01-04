@@ -2,7 +2,7 @@
 
 import { Moon, Sun, Volume2, VolumeX } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useTheme } from "@/components/theme-provider-enhanced"
+import { useTheme } from "@/components/providers/theme-provider-enhanced"
 
 export function ThemeToggle() {
   const { theme, setTheme, soundEnabled, setSoundEnabled } = useTheme()

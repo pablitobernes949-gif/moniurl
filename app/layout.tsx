@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/providers/theme-provider"
 import { BackendInitializer } from "@/components/backend-initializer"
 import { AlertNotificationSystem } from "@/components/alert-notification-system"
 import "./globals.css"

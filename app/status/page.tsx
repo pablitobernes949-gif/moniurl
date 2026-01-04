@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { CheckCircle, XCircle, AlertTriangle, Activity, Clock } from "lucide-react"
-import type { Service } from "@/lib/types"
+import type { Service } from "@/lib/utils/types"
 
 export default function StatusPage() {
   const [services, setServices] = useState<Service[]>([])
