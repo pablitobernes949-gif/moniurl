@@ -1,0 +1,445 @@
+{
+  "dashboard": {
+    "title": "Service Monitoring - Complete Dashboard",
+    "tags": ["monitoring", "services", "uptime", "alerts"],
+    "timezone": "browser",
+    "schemaVersion": 38,
+    "version": 2,
+    "refresh": "30s",
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+        "type": "graph",
+        "title": "📊 Latência por Serviço (ms)",
+        "targets": [
+          {
+            "refId": "A",
+            "target": "latency",
+            "datasource": "SimpleJSON"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "ms",
+            "label": "Latência (ms)"
+          }
+        ],
+        "xaxis": { "mode": "time" },
+        "lines": true,
+        "fill": 2,
+        "linewidth": 2,
+        "legend": {
+          "show": true,
+          "values": true,
+          "min": true,
+          "max": true,
+          "current": true,
+          "avg": true
+        },
+        "tooltip": { "shared": true }
+      },
+      {
+        "id": 2,
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+        "type": "graph",
+        "title": "✅ Status dos Serviços (Online/Offline)",
+        "targets": [
+          {
+            "refId": "A",
+            "target": "status",
+            "datasource": "SimpleJSON"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "short",
+            "label": "Status (1=Online, 0=Offline)",
+            "min": 0,
+            "max": 1
+          }
+        ],
+        "xaxis": { "mode": "time" },
+        "bars": false,
+        "lines": true,
+        "steppedLine": true,
+        "fill": 5,
+        "legend": {
+          "show": true,
+          "values": true,
+          "current": true
+        }
+      },
+      {
+        "id": 3,
+        "gridPos": { "h": 8, "w": 8, "x": 0, "y": 8 },
+        "type": "graph",
+        "title": "📈 Uptime Percentual (%)",
+        "targets": [
+          {
+            "refId": "A",
+            "target": "uptime",
+            "datasource": "SimpleJSON"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "percent",
+            "label": "Uptime (%)",
+            "min": 0,
+            "max": 100
+          }
+        ],
+        "xaxis": { "mode": "time" },
+        "lines": true,
+        "fill": 3,
+        "linewidth": 2,
+        "thresholds": [
+          {
+            "value": 99.9,
+            "colorMode": "critical",
+            "op": "lt",
+            "fill": true,
+            "line": true
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "gridPos": { "h": 8, "w": 8, "x": 8, "y": 8 },
+        "type": "graph",
+        "title": "📉 Packet Loss (%)",
+        "targets": [
+          {
+            "refId": "A",
+            "target": "packet_loss",
+            "datasource": "SimpleJSON"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "percent",
+            "label": "Packet Loss (%)",
+            "min": 0,
+            "max": 100
+          }
+        ],
+        "xaxis": { "mode": "time" },
+        "lines": true,
+        "fill": 2,
+        "linewidth": 2
+      },
+      {
+        "id": 5,
+        "gridPos": { "h": 8, "w": 8, "x": 16, "y": 8 },
+        "type": "graph",
+        "title": "🎯 Taxa de Sucesso (%)",
+        "targets": [
+          {
+            "refId": "A",
+            "target": "success_rate",
+            "datasource": "SimpleJSON"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "percent",
+            "label": "Taxa de Sucesso (%)",
+            "min": 0,
+            "max": 100
+          }
+        ],
+        "xaxis": { "mode": "time" },
+        "lines": true,
+        "fill": 4,
+        "linewidth": 2
+      },
+      {
+        "id": 6,
+        "gridPos": { "h": 6, "w": 6, "x": 0, "y": 16 },
+        "type": "stat",
+        "title": "🟢 Serviços Online",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "sum(service_up)",
+            "datasource": "Prometheus"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "value": 0, "color": "red" },
+                { "value": 1, "color": "yellow" },
+                { "value": 5, "color": "green" }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 7,
+        "gridPos": { "h": 6, "w": 6, "x": 6, "y": 16 },
+        "type": "stat",
+        "title": "🔴 Serviços Offline",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "count(service_up) - sum(service_up)",
+            "datasource": "Prometheus"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "value": 0, "color": "green" },
+                { "value": 1, "color": "yellow" },
+                { "value": 3, "color": "red" }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 8,
+        "gridPos": { "h": 6, "w": 6, "x": 12, "y": 16 },
+        "type": "stat",
+        "title": "⚠️ Alertas Ativos",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "sum(service_alerts_active)",
+            "datasource": "Prometheus"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "value": 0, "color": "green" },
+                { "value": 1, "color": "yellow" },
+                { "value": 5, "color": "red" }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 9,
+        "gridPos": { "h": 6, "w": 6, "x": 18, "y": 16 },
+        "type": "stat",
+        "title": "📊 Total de Checks",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "sum(service_checks_total)",
+            "datasource": "Prometheus"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "value": 0, "color": "blue" }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 10,
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 22 },
+        "type": "table",
+        "title": "📋 Resumo dos Serviços",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "service_up",
+            "datasource": "Prometheus",
+            "format": "table"
+          },
+          {
+            "refId": "B",
+            "expr": "service_latency_milliseconds",
+            "datasource": "Prometheus",
+            "format": "table"
+          },
+          {
+            "refId": "C",
+            "expr": "service_uptime_percentage",
+            "datasource": "Prometheus",
+            "format": "table"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "merge"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 22 },
+        "type": "bargauge",
+        "title": "🎯 Uptime por Serviço",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "service_uptime_percentage",
+            "datasource": "Prometheus"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "value": 0, "color": "red" },
+                { "value": 95, "color": "yellow" },
+                { "value": 99, "color": "green" }
+              ]
+            }
+          }
+        },
+        "options": {
+          "orientation": "horizontal",
+          "displayMode": "gradient"
+        }
+      },
+      {
+        "id": 12,
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 30 },
+        "type": "heatmap",
+        "title": "🔥 Heatmap de Latência",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "service_latency_milliseconds",
+            "datasource": "Prometheus"
+          }
+        ],
+        "dataFormat": "tsbuckets",
+        "heatmap": {},
+        "cards": {
+          "cardPadding": 2
+        },
+        "color": {
+          "mode": "spectrum",
+          "cardColor": "#b4ff00",
+          "colorScale": "sqrt",
+          "exponent": 0.5,
+          "min": 0,
+          "max": 1000
+        }
+      },
+      {
+        "id": 13,
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 30 },
+        "type": "timeseries",
+        "title": "📉 Latência Média (ms)",
+        "targets": [
+          {
+            "refId": "A",
+            "expr": "service_latency_average_milliseconds",
+            "datasource": "Prometheus"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 10,
+              "showPoints": "never"
+            }
+          }
+        }
+      },
+      {
+        "id": 14,
+        "gridPos": { "h": 8, "w": 24, "x": 0, "y": 38 },
+        "type": "alertlist",
+        "title": "⚠️ Alertas e Eventos",
+        "options": {
+          "showOptions": "current",
+          "maxItems": 20,
+          "sortOrder": 1,
+          "dashboardAlerts": true,
+          "alertName": "",
+          "dashboardTitle": "",
+          "tags": [],
+          "stateFilter": {
+            "firing": true,
+            "pending": true,
+            "noData": false,
+            "normal": false,
+            "error": true
+          }
+        }
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "datasource": "SimpleJSON",
+          "enable": true,
+          "name": "Alertas",
+          "iconColor": "red",
+          "tags": ["alert"]
+        },
+        {
+          "datasource": "SimpleJSON",
+          "enable": true,
+          "name": "Mudanças de Status",
+          "iconColor": "orange",
+          "tags": ["status"]
+        }
+      ]
+    },
+    "templating": {
+      "list": [
+        {
+          "name": "service",
+          "type": "query",
+          "datasource": "SimpleJSON",
+          "query": "services",
+          "refresh": 1,
+          "multi": true,
+          "includeAll": true
+        },
+        {
+          "name": "service_type",
+          "type": "query",
+          "datasource": "Prometheus",
+          "query": "label_values(service_up, service_type)",
+          "refresh": 1,
+          "multi": true,
+          "includeAll": true
+        }
+      ]
+    }
+  }
+}
