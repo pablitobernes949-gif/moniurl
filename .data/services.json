@@ -4,7 +4,7 @@
     "name": "Google",
     "url": "8.8.8.8",
     "status": "online",
-    "lastCheck": 1767531732717,
+    "lastCheck": 1767531792665,
     "responseTime": 52,
     "history": [
       {
@@ -3648,9 +3648,27 @@
         "minLatency": 52,
         "maxLatency": 52,
         "avgLatency": 52
+      },
+      {
+        "timestamp": 1767531762670,
+        "status": "online",
+        "responseTime": 56,
+        "packetLoss": 0,
+        "minLatency": 52,
+        "maxLatency": 62,
+        "avgLatency": 56
+      },
+      {
+        "timestamp": 1767531792630,
+        "status": "online",
+        "responseTime": 52,
+        "packetLoss": 0,
+        "minLatency": 52,
+        "maxLatency": 52,
+        "avgLatency": 52
       }
     ],
-    "uptime": 93.48,
+    "uptime": 93.51,
     "createdAt": 1767352059637,
     "packetLoss": 0,
     "minLatency": 52,
@@ -3662,12 +3680,12 @@
     "name": "Site Huios",
     "url": "huiosconsultoria.net.br",
     "status": "online",
-    "lastCheck": 1767531733073,
-    "responseTime": 182,
+    "lastCheck": 1767531792923,
+    "responseTime": 179,
     "packetLoss": 0,
-    "minLatency": 178,
-    "maxLatency": 185,
-    "avgLatency": 182,
+    "minLatency": 172,
+    "maxLatency": 184,
+    "avgLatency": 179,
     "history": [
       {
         "timestamp": 1767355260302,
@@ -6935,6 +6953,24 @@
         "minLatency": 178,
         "maxLatency": 185,
         "avgLatency": 182
+      },
+      {
+        "timestamp": 1767531762905,
+        "status": "online",
+        "responseTime": 177,
+        "packetLoss": 0,
+        "minLatency": 175,
+        "maxLatency": 182,
+        "avgLatency": 177
+      },
+      {
+        "timestamp": 1767531792869,
+        "status": "online",
+        "responseTime": 179,
+        "packetLoss": 0,
+        "minLatency": 172,
+        "maxLatency": 184,
+        "avgLatency": 179
       }
     ],
     "uptime": 100,
@@ -6945,7 +6981,7 @@
     "name": "teste",
     "url": "192.168.0.0",
     "status": "offline",
-    "lastCheck": 1767531718048,
+    "lastCheck": 1767531808018,
     "responseTime": null,
     "packetLoss": 100,
     "minLatency": null,
@@ -9633,6 +9669,33 @@
         "minLatency": null,
         "maxLatency": null,
         "avgLatency": null
+      },
+      {
+        "timestamp": 1767531748129,
+        "status": "offline",
+        "responseTime": null,
+        "packetLoss": 100,
+        "minLatency": null,
+        "maxLatency": null,
+        "avgLatency": null
+      },
+      {
+        "timestamp": 1767531777991,
+        "status": "offline",
+        "responseTime": null,
+        "packetLoss": 100,
+        "minLatency": null,
+        "maxLatency": null,
+        "avgLatency": null
+      },
+      {
+        "timestamp": 1767531807988,
+        "status": "offline",
+        "responseTime": null,
+        "packetLoss": 100,
+        "minLatency": null,
+        "maxLatency": null,
+        "avgLatency": null
       }
     ],
     "uptime": 0,
@@ -9643,12 +9706,12 @@
     "name": "Sefa - DAE - Avulso",
     "url": "https://app.sefa.pa.gov.br/emissao-dae-avulso/#/inicio",
     "status": "online",
-    "lastCheck": 1767531718165,
-    "responseTime": 44,
+    "lastCheck": 1767531808107,
+    "responseTime": 41,
     "packetLoss": 0,
-    "minLatency": 42,
-    "maxLatency": 47,
-    "avgLatency": 44,
+    "minLatency": 39,
+    "maxLatency": 43,
+    "avgLatency": 41,
     "history": [
       {
         "timestamp": 1767365733792,
@@ -10333,6 +10396,33 @@
         "minLatency": 42,
         "maxLatency": 47,
         "avgLatency": 44
+      },
+      {
+        "timestamp": 1767531748268,
+        "status": "online",
+        "responseTime": 52,
+        "packetLoss": 0,
+        "minLatency": 47,
+        "maxLatency": 56,
+        "avgLatency": 52
+      },
+      {
+        "timestamp": 1767531778089,
+        "status": "online",
+        "responseTime": 44,
+        "packetLoss": 0,
+        "minLatency": 44,
+        "maxLatency": 44,
+        "avgLatency": 44
+      },
+      {
+        "timestamp": 1767531808079,
+        "status": "online",
+        "responseTime": 41,
+        "packetLoss": 0,
+        "minLatency": 39,
+        "maxLatency": 43,
+        "avgLatency": 41
       }
     ],
     "uptime": 100,
@@ -10343,12 +10433,12 @@
     "name": "EMISSÃO-CERTIDÃO",
     "url": "https://app.sefa.pa.gov.br/emissao-certidao/template.action",
     "status": "online",
-    "lastCheck": 1767531718379,
-    "responseTime": 128,
+    "lastCheck": 1767531808306,
+    "responseTime": 121,
     "packetLoss": 0,
-    "minLatency": 90,
+    "minLatency": 72,
     "maxLatency": 154,
-    "avgLatency": 128,
+    "avgLatency": 121,
     "history": [
       {
         "timestamp": 1767365973916,
@@ -10961,6 +11051,33 @@
         "minLatency": 90,
         "maxLatency": 154,
         "avgLatency": 128
+      },
+      {
+        "timestamp": 1767531748548,
+        "status": "online",
+        "responseTime": 148,
+        "packetLoss": 0,
+        "minLatency": 116,
+        "maxLatency": 170,
+        "avgLatency": 148
+      },
+      {
+        "timestamp": 1767531778326,
+        "status": "online",
+        "responseTime": 134,
+        "packetLoss": 0,
+        "minLatency": 86,
+        "maxLatency": 181,
+        "avgLatency": 134
+      },
+      {
+        "timestamp": 1767531808278,
+        "status": "online",
+        "responseTime": 121,
+        "packetLoss": 0,
+        "minLatency": 72,
+        "maxLatency": 154,
+        "avgLatency": 121
       }
     ],
     "uptime": 100,
@@ -10971,12 +11088,12 @@
     "name": "CONSULTA - NFCE",
     "url": "https://app.sefa.pa.gov.br/consulta-nfce/#/consulta",
     "status": "online",
-    "lastCheck": 1767531718482,
-    "responseTime": 38,
+    "lastCheck": 1767531808392,
+    "responseTime": 37,
     "packetLoss": 0,
     "minLatency": 36,
     "maxLatency": 38,
-    "avgLatency": 38,
+    "avgLatency": 37,
     "history": [
       {
         "timestamp": 1767366004056,
@@ -11580,6 +11697,33 @@
         "minLatency": 36,
         "maxLatency": 38,
         "avgLatency": 38
+      },
+      {
+        "timestamp": 1767531748731,
+        "status": "online",
+        "responseTime": 63,
+        "packetLoss": 0,
+        "minLatency": 56,
+        "maxLatency": 71,
+        "avgLatency": 63
+      },
+      {
+        "timestamp": 1767531778438,
+        "status": "online",
+        "responseTime": 52,
+        "packetLoss": 0,
+        "minLatency": 51,
+        "maxLatency": 54,
+        "avgLatency": 52
+      },
+      {
+        "timestamp": 1767531808364,
+        "status": "online",
+        "responseTime": 37,
+        "packetLoss": 0,
+        "minLatency": 36,
+        "maxLatency": 38,
+        "avgLatency": 37
       }
     ],
     "uptime": 100,
@@ -11590,12 +11734,12 @@
     "name": "IPVA",
     "url": "https://app.sefa.pa.gov.br/ipva-antecipado/login",
     "status": "online",
-    "lastCheck": 1767531718622,
-    "responseTime": 62,
+    "lastCheck": 1767531808510,
+    "responseTime": 57,
     "packetLoss": 0,
-    "minLatency": 55,
-    "maxLatency": 77,
-    "avgLatency": 62,
+    "minLatency": 52,
+    "maxLatency": 70,
+    "avgLatency": 57,
     "history": [
       {
         "timestamp": 1767366064208,
@@ -12181,6 +12325,33 @@
         "minLatency": 55,
         "maxLatency": 77,
         "avgLatency": 62
+      },
+      {
+        "timestamp": 1767531748873,
+        "status": "online",
+        "responseTime": 65,
+        "packetLoss": 0,
+        "minLatency": 59,
+        "maxLatency": 71,
+        "avgLatency": 65
+      },
+      {
+        "timestamp": 1767531778582,
+        "status": "online",
+        "responseTime": 88,
+        "packetLoss": 0,
+        "minLatency": 85,
+        "maxLatency": 92,
+        "avgLatency": 88
+      },
+      {
+        "timestamp": 1767531808481,
+        "status": "online",
+        "responseTime": 57,
+        "packetLoss": 0,
+        "minLatency": 52,
+        "maxLatency": 70,
+        "avgLatency": 57
       }
     ],
     "uptime": 100,

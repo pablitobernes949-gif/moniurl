@@ -2680,5 +2680,32 @@
     "minLatency": null,
     "maxLatency": null,
     "avgLatency": null
+  },
+  {
+    "timestamp": 1767531748129,
+    "status": "offline",
+    "responseTime": null,
+    "packetLoss": 100,
+    "minLatency": null,
+    "maxLatency": null,
+    "avgLatency": null
+  },
+  {
+    "timestamp": 1767531777991,
+    "status": "offline",
+    "responseTime": null,
+    "packetLoss": 100,
+    "minLatency": null,
+    "maxLatency": null,
+    "avgLatency": null
+  },
+  {
+    "timestamp": 1767531807988,
+    "status": "offline",
+    "responseTime": null,
+    "packetLoss": 100,
+    "minLatency": null,
+    "maxLatency": null,
+    "avgLatency": null
   }
 ]

@@ -601,5 +601,32 @@
     "minLatency": 36,
     "maxLatency": 38,
     "avgLatency": 38
+  },
+  {
+    "timestamp": 1767531748731,
+    "status": "online",
+    "responseTime": 63,
+    "packetLoss": 0,
+    "minLatency": 56,
+    "maxLatency": 71,
+    "avgLatency": 63
+  },
+  {
+    "timestamp": 1767531778438,
+    "status": "online",
+    "responseTime": 52,
+    "packetLoss": 0,
+    "minLatency": 51,
+    "maxLatency": 54,
+    "avgLatency": 52
+  },
+  {
+    "timestamp": 1767531808364,
+    "status": "online",
+    "responseTime": 37,
+    "packetLoss": 0,
+    "minLatency": 36,
+    "maxLatency": 38,
+    "avgLatency": 37
   }
 ]

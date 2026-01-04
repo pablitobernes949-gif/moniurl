@@ -3640,5 +3640,23 @@
     "minLatency": 52,
     "maxLatency": 52,
     "avgLatency": 52
+  },
+  {
+    "timestamp": 1767531762670,
+    "status": "online",
+    "responseTime": 56,
+    "packetLoss": 0,
+    "minLatency": 52,
+    "maxLatency": 62,
+    "avgLatency": 56
+  },
+  {
+    "timestamp": 1767531792630,
+    "status": "online",
+    "responseTime": 52,
+    "packetLoss": 0,
+    "minLatency": 52,
+    "maxLatency": 52,
+    "avgLatency": 52
   }
 ]

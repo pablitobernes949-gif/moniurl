@@ -3265,5 +3265,23 @@
     "minLatency": 178,
     "maxLatency": 185,
     "avgLatency": 182
+  },
+  {
+    "timestamp": 1767531762905,
+    "status": "online",
+    "responseTime": 177,
+    "packetLoss": 0,
+    "minLatency": 175,
+    "maxLatency": 182,
+    "avgLatency": 177
+  },
+  {
+    "timestamp": 1767531792869,
+    "status": "online",
+    "responseTime": 179,
+    "packetLoss": 0,
+    "minLatency": 172,
+    "maxLatency": 184,
+    "avgLatency": 179
   }
 ]
